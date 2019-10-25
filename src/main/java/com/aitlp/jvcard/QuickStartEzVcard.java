@@ -9,12 +9,13 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class QuickStartEzVcard {
 
     public static void main(String[] args) {
         List<String> whiteListEmails = new QuickStartEzVcard().readEmails("F:\\jvcard\\src\\main\\java\\com\\aitlp\\jvcard\\whitelist.txt");
-        List<String> emails = new QuickStartEzVcard().readEmails("F:\\飞飞影视群.txt");
+        List<String> emails = new QuickStartEzVcard().readEmails("F:\\QQ群.txt");
         List<VCard> vcards = new ArrayList<>();
         if (ObjectUtils.isNotEmpty(emails)) {
             for (String email : emails) {
@@ -24,7 +25,13 @@ public class QuickStartEzVcard {
                     vcards.add(vCard);
                 }
             }
-            new QuickStartEzVcard().writeVcardFile(vcards,"F:\\ALLEMAILS.vcf");
+            // 随机 100
+            Random r = new Random();
+            List<VCard> randomList = new ArrayList<>();
+            while (randomList.size() < 100){
+                randomList.add(vcards.get(r.nextInt(vcards.size())));
+            }
+            new QuickStartEzVcard().writeVcardFile(randomList,"F:\\ALLEMAILS.vcf");
         }
     }
 
